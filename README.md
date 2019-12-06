@@ -50,13 +50,7 @@ Export: A command that can be used to export the data in CSV format. The file pa
 
         Method: POST
 
-5. A view to delete a sighting
-
-        Located at: /sightings/
-        
-        Method: DELETE
-
-6. A view with general statistics about the sightings
+5. A view with general statistics about the sightings
 
         Located at: /sightings/stats
         
