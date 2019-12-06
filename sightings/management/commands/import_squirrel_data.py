@@ -4,31 +4,29 @@ import csv, re
 from datetime import date
 
 class Command(BaseCommand):
-    help ='Import squirrel data from NYC Central Park'
+    help ='import squirrel data'
 
     def add_arguments(self, parser):
-        parser.add_argument('path', type=str, help='path of file to be imported')
+        parser.add_argument('path', type=str, help='file path')
 
     def handle(self, *args, **kwargs):
         path = kwargs['path']
-        
         pattern = re.compile(r'(\d{2})(\d{2})(\d{4})')
-
-        with open(path, mode='r') as csvfile:
-            reader = csv.DictReader(csvfile)
-            USID = set()
+        with open(path, mode='r') as f:
+            reader = csv.DictReader(f)
+            data = set()
             for row in reader:
-                if row.get('Unique Squirrel ID') in USID:
+                if row.get('Unique Squirrel ID') in data:
                     continue
                 else:
-                    i,j,k = pattern.match(row.get('Date')).groups()
+                    m,d,y = pattern.match(row.get('Date')).groups()
                     obj, created = Squirrel.objects.get_or_create(
                         X = row.get('X'),
                         Y = row.get('Y'),
                         Unique_Squirrel_ID = row.get('Unique Squirrel ID'),
                         Hectare = row.get('Hectare'),
                         Shift = row.get('Shift'),
-                        Date = date(int(k),int(i),int(j)),
+                        Date = date(int(y),int(m),int(d)),
                         Hectare_Squirrel_Number = row.get('Hectare Squirrel Number'),
                         Age = row.get('Age'),
                         Primary_Fur_Color = row.get('Primary Fur Color'),
@@ -59,5 +57,5 @@ class Command(BaseCommand):
                         City_Council_Districts = row.get('City Council Districts'),
                         Police_Precincts = row.get('Police Precincts'),
                      )
-                USID.add(row.get('Unique Squirrel ID'))
-        print('Done!')
+                data.add(row.get('Unique Squirrel ID'))
+        print('Success!')
