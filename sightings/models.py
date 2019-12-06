@@ -25,9 +25,6 @@ class Squirrel(models.Model):
         null=True,
     )
 
-    def __str__(self):
-        return self.name
-
     AM = 'AM'
     PM = 'PM'
 
@@ -147,8 +144,8 @@ class Squirrel(models.Model):
     Location = models.CharField(
         help_text=_('Location'),
         choices = (
-            (AG, 'Above Ground'),
-            (GP, 'Ground Plane'),
+            (AboveGround, 'Above Ground'),
+            (GroundPlane, 'Ground Plane'),
             (BLANK, ''),
         ),
         default = BLANK,
@@ -256,3 +253,6 @@ class Squirrel(models.Model):
         null=True,
         default='13',
     )
+
+    def __str__(self):
+        return self.name

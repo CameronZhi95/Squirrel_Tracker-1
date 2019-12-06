@@ -2,8 +2,98 @@
 <html>
 <head>
 	<title>Squirrel Sightings</title>
+	<h1><center>Squirrel List</center></h1>
 </head>
 <body>
+	<table border = "1">
+	    <thead>
+	      <tr>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Unique_Squirrel_ID</th>
+          <th>Hectare</th>
+          <th>Shift</th>
+          <th>Date</th>
+          <th>Hectare_Number</th>
+          <th>Age</th>
+          <th>Primary_Color</th>
+          <th>Highlight_Color</th>
+          <th>Combination_Fur</th>
+          <th>Color_Notes</th>
+          <th>Location</th>
+          <th>Measurement</th>
+          <th>Specific_Location</th>
+          <th>Running</th>
+          <th>Chasing</th>
+          <th>Climbing</th>
+          <th>Eating</th>
+          <th>Foraging</th>
+          <th>Other_Activities</th>
+          <th>Kuks</th>
+          <th>Quaas</th>
+          <th>Moans</th>
+          <th>Tail_Flags</th>
+          <th>Tail_Twitches</th>
+          <th>Approaches</th>
+          <th>Indifferent</th>
+          <th>Runs_From</th>
+          <th>Other_Interactions</th>
+          <th>Lat_Long</th>
+	      </tr>
+	    </thead>
+	    <tbody id="myTable">
+	    	{% for squirrel in numbers %}
+	        <tr>
+	        <td>{{squirrel.X}}</td>
+          	<td>{{squirrel.Y}}</td>
+          	<td>{{squirrel.Unique_Squirrel_ID}}</td>
+            <td>{{squirrel.Hectare}}</td>
+            <td>{{squirrel.Shift}}</td>
+            <td>{{squirrel.Date}}</td>
+            <td>{{squirrel.Hectare_Squirrel_Number}}</td>
+            <td>{{squirrel.Age}}</td>
+            <td>{{squirrel.Primary_Fur_Color}}</td>
+            <td>{{squirrel.Highlight_Fur_Color}}</td>
+            <td>{{squirrel.Combination_Fur}}</td>
+            <td>{{squirrel.Color_Notes}}</td>
+            <td>{{squirrel.Location}}</td>
+            <td>{{squirrel.Above_Ground_Sighter_Measurement}}</td>
+            <td>{{squirrel.Specific_Location}}</td>
+            <td>{{squirrel.Running}}</td>
+            <td>{{squirrel.Chasing}}</td>
+            <td>{{squirrel.Climbing}}</td>
+            <td>{{squirrel.Eating}}</td>
+            <td>{{squirrel.Foraging}}</td>
+            <td>{{squirrel.Other_Activities}}</td>
+            <td>{{squirrel.Kuks}}</td>
+            <td>{{squirrel.Quaas}}</td>
+            <td>{{squirrel.Moans}}</td>
+            <td>{{squirrel.Tail_Flags}}</td>
+            <td>{{squirrel.Tail_Twitches}}</td>
+            <td>{{squirrel.Approaches}}</td>
+            <td>{{squirrel.Indifferent}}</td>
+            <td>{{squirrel.Runs_From}}</td>
+            <td>{{squirrel.Other_Interactions}}</td>
+            <td>{{squirrel.Lat_Long}}</td>
+	        </tr>
+	    	{% endfor %}
+	    </tbody>
+  	</table>
 
+  	<div class="pagination">
+        {% if numbers.has_previous %}
+          <a href="?page=1">First Page</a>
+          <a href="?page={{ numbers.previous_page_number }}">Previous</a>
+        {% endif %}
+      
+        <span>{{ numbers.number }}</span>
+        <span">of</span>
+        <span>{{ numbers.paginator.num_pages }}</span>
+      
+        {% if numbers.has_next %}
+        <a href="?page={{ numbers.next_page_number }}">Next Page</a>
+        <a href="?page={{ numbers.paginator.num_pages }}">Last Page</a>
+        {% endif %}
+    </div> 
 </body>
 </html>
